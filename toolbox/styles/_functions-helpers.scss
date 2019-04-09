@@ -1,34 +1,50 @@
 //-------------------------------------
-//-- nwayo - Functions
+//-- nwayo - Functions - Helpers
 //-------------------------------------
 
-//-- Foundation's rem-calc asap
-@import 'bower_components/foundation-sites/scss/util/unit';
+//-- Deep map: Path splitter
+@function nwayo-map-deep-split-path($path) {
+	$keys:      ();
+	$separator: '.';
+	$index:     str-index($path, $separator);
 
-
-
-//-- Assets path
-@function nwayo-assets-path($file, $context, $type) {
-	@if $type == 'images' {
-		@return $konstan-path-images + '/' + $context + '/' + $file;
-	} @else if $type == 'inline' {
-		@return $konstan-path-inline + '/' + $context + '/' + $file;
-	} @else if $type == 'fonts' {
-		@return $konstan-path-fonts + '/' + $context + '/' + $file;
+	@while $index != null {
+		$item:  str-slice($path, 1, $index - 1);
+		$keys:  append($keys, $item);
+		$path:  str-slice($path, $index + 1);
+		$index: str-index($path, $separator);
 	}
+
+	@return append($keys, $path);
 }
 
-//-- Build path
-@function nwayo-build-path($file, $context, $type) {
-	@if $type == 'images' {
-		@return $konstan-path-buildroot + '/images/' + $context + '/' + $file;
-	} @else if $type == 'fonts' {
-		@return $konstan-path-buildroot + '/fonts/' + $context + '/' + $file;
+//-- Deep map: Has key
+@function nwayo-map-deep-has-key($map, $path) {
+	@each $key in nwayo-map-deep-split-path($path) {
+		@if map-has-key($map, $key) {
+			$map: map-get($map, $key);
+		} @else {
+			@return false;
+		}
 	}
+
+	@return true;
 }
 
+//-- Deep map: Get value
+@function nwayo-map-deep-get($map, $path) {
+	@each $key in nwayo-map-deep-split-path($path) {
+		@if $map != null {
+			@if map-has-key($map, $key) {
+				$map: map-get($map, $key);
+			} @else {
+				$map: null;
+			}
+		}
+	}
 
-
+	@return $map;
+}
 
 
 
@@ -41,6 +57,8 @@
 	@return $string;
 }
 
+
+
 //-- Color replace
 @function nwayo-color-replace($string, $source, $target) {
 	$string: nwayo-str-replace($string, nwayo-to-string($source), nwayo-to-string($target));
@@ -48,10 +66,14 @@
 	@return $string;
 }
 
+
+
 //-- Cast to string
 @function nwayo-to-string($value) {
 	@return inspect($value);
 }
+
+
 
 //-- Check if list contains value
 //     @mixin xyz($options:()) {
@@ -64,9 +86,6 @@
 	}
 	@return false;
 }
-
-
-
 
 
 
@@ -87,27 +106,4 @@
 		$index: $index + $slice;
 	}
 	@return url("data:image/svg+xml;charset=utf8,#{$encoded}");  // stylelint-disable-line string-quotes
-}
-
-
-
-//-- Get a relative z-index for the scope
-@function nwayo-zindex($scopes, $scope, $delta:0) {
-	@return map-get($scopes, $scope) + $delta;
-}
-
-
-//-- Simulate a breakpoint
-@function nwayo-breakpoint-media($bp, $direction) {
-	@if ($direction == up) {
-		@return 'screen and (min-width: #{($bp + 1) / $nwayo-basic-size * 1em})';
-	} @else if ($direction == down) {
-		@return 'screen and (max-width: #{$bp / $nwayo-basic-size * 1em})';
-	}
-}
-
-
-//-- Return cache invalidation query string
-@function nwayo-cacheinvalidator-querystring($file) {
-	@return '?v=' + nwayodart-checksum($file);
 }
