@@ -1,0 +1,40 @@
+{
+  "name": "nwayo-toolbox",
+  "version": "3.4.0",
+  "description": "Toolbox for nwayo",
+  "definition": "/nwajo/ (haitian creole) The tough central part of various fruits, containing the seeds.",
+   "homepage": "http://absolunet.github.io/nwayo",
+   "author": {
+    "name": "Absolunet",
+    "url": "http://absolunet.com/"
+  },
+  "keywords": [
+    "nwayo"
+  ],
+  "license": "MIT",
+  "repository": {
+    "url": "git://github.com/absolunet/nwayo.git",
+    "type": "git"
+  },
+  "bugs": {
+    "url": "https://github.com/absolunet/nwayo/issues"
+  },
+  "main": [
+    "toolbox/scripts/dependencies-starter.js",
+    "toolbox/styles/config.scss"
+  ],
+  "ignore": [
+    "boilerplate",
+    "docs",
+    "ressources",
+    "test",
+    "workflow",
+    ".editorconfig",
+    ".eslintrc.yaml",
+    ".gitignore",
+    ".stylelintrc.yaml",
+    ".sublimelinterrc",
+    ".travis.yml",
+    "nwayo.sublime-project"
+  ]
+}
