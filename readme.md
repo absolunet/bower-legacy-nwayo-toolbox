@@ -27,12 +27,11 @@
 ## Get started
  - Get the files under [boilerplate](boilerplate)
  - Replace `PROJECT_NAME` in `bower.json` and `package.json` with your project's name
- - Rename `PROJECT_NAME.sublime-project` with your project's name
 
 Run in nwayo root folder
 ```shell
-npm install
-bower install
+nwayo install vendors
+nwayo install workflow
 nwayo rebuild
 ```
 
@@ -57,13 +56,13 @@ nwayo rebuild
 #### Other
 - Optimizes images via [gifsicle](//www.lcdf.org/gifsicle), [jpegtran](http://libjpeg-turbo.virtualgl.org), [optipng](http://optipng.sourceforge.net), [svgo](//github.com/svg/svgo)
 - Generates iconography via [GraphicsMagick](http://www.graphicsmagick.org), [ImageMagick](//www.imagemagick.org)
-- Optimized for [Sublime Text 3](//www.sublimetext.com) with [SublimeLinter 3](http://www.sublimelinter.com)
+- Optimized for [Atom](//atom.io) with [AtomLinter](//atomlinter.github.io)
 
 
 
 ## Tried and tested
  - Currently deployed on 200+ sites
- - Front end to [Drupal](//www.drupal.org), [Wordpress](//wordpress.org), [Symfony](//symfony.com), [Magento 1 & 2](//magento.com), [Sitecore](//www.sitecore.net), [Insite](http://www.insitesoft.com) environments
+ - Front end to [Drupal](//www.drupal.org), [Wordpress](//wordpress.org), [Symfony](//symfony.com), [Magento 1 & 2](//magento.com), [Sitecore](//www.sitecore.net), [Insite](http://www.insitesoft.com), [Shopify](//www.shopify.ca) environments
 
 ## Components
 Multiple component boilerplates [available](//github.com/absolunet/nwayo-components)
